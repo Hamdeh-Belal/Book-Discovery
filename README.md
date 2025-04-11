@@ -8,8 +8,9 @@ It demonstrates how to consume and interact with an external **RESTful API** usi
 
 ## 👥 Group Members
 
-- **Amro Tarek Osman** — 12345678  
-*(Add any teammates if applicable)*
+- **Yazan Jamhour** — 1192533
+- **Amro Tariq** — 1201603
+- **Belal Hamdeh** — 1210148
 
 ---
 
