@@ -1,12 +1,46 @@
-# React + Vite
+# Open Library Book Search (Assignment 1 - COM4381)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is developed as part of **Assignment 1** for the course *Web Services Technologies (COM4381)*, 2nd Semester 2024/2025.
 
-Currently, two official plugins are available:
+It demonstrates how to consume and interact with an external **RESTful API** using modern frontend technologies, specifically the **Open Library API**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 👥 Group Members
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Amro Tarek Osman** — 12345678  
+*(Add any teammates if applicable)*
+
+---
+
+## 🔗 API Used
+
+- **Open Library API**  
+  [https://openlibrary.org/developers/api](https://openlibrary.org/developers/api)
+
+---
+
+## 🎯 Project Description
+
+This web application allows users to search for books by title, author, or subject using the Open Library API. The app retrieves data via RESTful endpoints, demonstrates core REST principles, and presents the results in an interactive and user-friendly interface built with React and Tailwind CSS.
+
+**Core Features:**
+
+- Book search with pagination
+- Clickable book cards to view detailed info (authors, year, subjects, cover)
+- Integration with Internet Archive links to "Read this book"
+- Light/Dark mode toggle
+- Responsive design
+- Back-to-top button
+- REST principles demonstrated: `GET` method, query parameters, resource representation (JSON)
+
+
+## 🚀 How to Run
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/Amro192/Book-Discovery.git
+cd assignment1
+npm install
+npm run dev
+```
