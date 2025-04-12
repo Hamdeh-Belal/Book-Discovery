@@ -1,5 +1,14 @@
-export default function BookModal({selectedBook, onClose}) {
+import { useEffect, useState } from "react";
+import { generateSummary } from "../utils/generateSummary";
+
+export default function BookModal({ selectedBook, onClose }) {
     if (!selectedBook) return null;
+    const [summary, setSummary] = useState("Generating summary...");
+    useEffect(() => {
+        if (selectedBook?.title) {
+            generateSummary(selectedBook.title).then(setSummary);
+        }
+    }, [selectedBook]);
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
@@ -35,6 +44,13 @@ export default function BookModal({selectedBook, onClose}) {
                         Subjects: {selectedBook.subject.slice(0, 5).join(", ")}
                     </p>
                 )}
+                <div className="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded">
+                    <h3 className="font-semibold text-lg mb-1 text-gray-800 dark:text-white">AI-Generated Summary:</h3>
+                    <p className="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line">
+                        {summary}
+                    </p>
+                </div>
+
                 {selectedBook.ia && (
                     <a
                         href={`https://archive.org/details/${selectedBook.ia[0]}`}

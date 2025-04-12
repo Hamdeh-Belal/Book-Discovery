@@ -6,14 +6,14 @@ export default function useBookSearch() {
     const [books, setBooks] = useState([]);
     const [error, setError] = useState(null);
 
-    const fetchBooks = async (query, page) => {
+    const fetchBooks = async (query, page, filter = "q") => {
         if (!query) return;
         setLoading(true);
         setError(null);
 
         try {
             const res = await axios.get(
-                `https://openlibrary.org/search.json?q=${encodeURIComponent(query)}&page=${page}`
+                `https://openlibrary.org/search.json?${filter}=${encodeURIComponent(query)}&page=${page}`
             );
             setBooks(res.data.docs);
         } catch (err) {
