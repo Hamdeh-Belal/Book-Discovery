@@ -24,5 +24,5 @@ export default function useBookSearch() {
         setLoading(false);
     };
 
-    return {loading, books, error, fetchBooks};
+    return {loading, books, error, fetchBooks, setBooks};
 }

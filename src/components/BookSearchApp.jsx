@@ -14,7 +14,7 @@ export default function BookSearchApp() {
     const [darkMode, setDarkMode] = useState(false);
     const [showScrollTop, setShowScrollTop] = useState(false);
 
-    const {loading, books, fetchBooks} = useBookSearch();
+    const {loading, books, fetchBooks, setBooks} = useBookSearch();
 
     // Fetch books whenever 'page' changes, but only if there's a query
     useEffect(() => {
@@ -43,6 +43,7 @@ export default function BookSearchApp() {
         setQuery("");
         setPage(1);
         setSelectedBook(null);
+        setBooks([]);
     };
 
     return (
