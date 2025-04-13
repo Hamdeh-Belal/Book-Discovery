@@ -1,4 +1,8 @@
-export default function ScrollToTopButton({showScrollTop}) {
+import {useScrollPosition} from "../hooks/useScrollPosition";
+
+export default function ScrollToTopButton() {
+    const showScrollTop = useScrollPosition(100);
+
     if (!showScrollTop) return null;
 
     const handleScrollToTop = () => {

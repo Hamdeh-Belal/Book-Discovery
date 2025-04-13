@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
-import { generateSummary } from "../utils/generateSummary";
+import {useEffect, useState} from "react";
+import {generateSummary} from "../utils/generateSummary";
 
-export default function BookModal({ selectedBook, onClose }) {
-    if (!selectedBook) return null;
+export default function BookModal({selectedBook, onClose}) {
     const [summary, setSummary] = useState("Generating summary...");
     useEffect(() => {
         if (selectedBook?.title) {
@@ -10,6 +9,8 @@ export default function BookModal({ selectedBook, onClose }) {
         }
     }, [selectedBook]);
 
+    if (!selectedBook) return null;
+    
     return (
         <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
             <div className="bg-white dark:bg-gray-800 p-6 rounded shadow-lg max-w-lg w-full relative">

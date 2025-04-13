@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import useBookSearch from "../hooks/useBookSearch";
 import SearchBar from "./SearchBar";
 import BookList from "./BookList";
@@ -6,20 +6,38 @@ import BookModal from "./BookModal";
 import DarkModeToggle from "./DarkModeToggle";
 import Pagination from "./Pagination";
 import ScrollToTopButton from "./ScrollToTopButton";
-import QuoteBanner from "./QuoteBanner";
 import WelcomeBanner from "./WelcomeBanner";
+import useDarkMode from "../hooks/useDarkMode.js";
+import LoadingSpinner from "./LoadingSpinner.jsx";
 
-
-
+function renderMainContent({
+                               loading,
+                               hasQuery,
+                               books,
+                               setSelectedBook
+                           }) {
+    if (loading) {
+        return <LoadingSpinner/>;
+    } else if (!hasQuery) {
+        return <WelcomeBanner/>;
+    } else if (books.length > 0) {
+        return <BookList books={books} onSelectBook={setSelectedBook}/>;
+    } else {
+        return (
+            <p className="text-center text-gray-500 mt-8 text-lg">
+                🔍 No books found. Try another keyword!
+            </p>
+        );
+    }
+}
 
 export default function BookSearchApp() {
     const [filter, setFilter] = useState("q"); // q = all fields
     const [query, setQuery] = useState("");
     const [page, setPage] = useState(1);
     const [selectedBook, setSelectedBook] = useState(null);
-    const [darkMode, setDarkMode] = useState(false);
-    const [showScrollTop, setShowScrollTop] = useState(false);
-    const { loading, books, fetchBooks, setBooks } = useBookSearch();
+    const [darkMode, setDarkMode] = useDarkMode();
+    const {loading, books, fetchBooks, setBooks} = useBookSearch();
 
     // Fetch books whenever 'page' changes, but only if there's a query
     useEffect(() => {
@@ -28,22 +46,12 @@ export default function BookSearchApp() {
         }
     }, [page]);
 
-    // Handle scroll to show/hide "Scroll to Top" button
-    useEffect(() => {
-        const handleScroll = () => {
-            setShowScrollTop(window.scrollY > 100);
-        };
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-
     // Triggers a fresh search (page reset to 1)
     const handleSearch = () => {
         setPage(1);
         fetchBooks(query, 1, filter);
     };
 
-    // Reset everything to initial
     const resetToMain = () => {
         setQuery("");
         setPage(1);
@@ -57,7 +65,7 @@ export default function BookSearchApp() {
 
                 {/* Dark Mode Toggle */}
                 <div className="flex justify-end mb-2">
-                    <DarkModeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
+                    <DarkModeToggle darkMode={darkMode} setDarkMode={setDarkMode}/>
                 </div>
 
                 {/* Header */}
@@ -72,39 +80,26 @@ export default function BookSearchApp() {
                         </h1>
 
                         {/* Search Bar */}
-                        <SearchBar query={query} setQuery={setQuery} onSearch={handleSearch} filter={filter} setFilter={setFilter} />
+                        <SearchBar query={query} setQuery={setQuery} onSearch={handleSearch} filter={filter}
+                                   setFilter={setFilter}/>
                     </div>
                 </div>
 
                 {/* Book Modal */}
-                <BookModal selectedBook={selectedBook} onClose={() => setSelectedBook(null)} />
+                <BookModal selectedBook={selectedBook} onClose={() => setSelectedBook(null)}/>
 
-                {/* Loading State */}
-                {loading ? (
-                    <div className="flex justify-center my-6">
-                        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
-                    </div>
-                ) : query === "" ? (
-                    <WelcomeBanner />
-                ) : books.length > 0 ? (
-                    <BookList books={books} onSelectBook={setSelectedBook} />
-                ) : (
-                    <p className="text-center text-gray-500 mt-8 text-lg">
-                        🔍 No books found. Try another keyword!
-                    </p>
-                )}
+                {renderMainContent({
+                    loading,
+                    hasQuery: query,
+                    books,
+                    setSelectedBook
+                })}
 
-
-
-                {/* Pagination */}
-                {books.length > 0 && (
-                    <Pagination page={page} setPage={setPage} />
-                )}
-
+                {/* Pagination: only show if we have search results */}
+                {books.length > 0 && <Pagination page={page} setPage={setPage}/>}
             </div>
 
-            {/* Scroll to Top Button */}
-            <ScrollToTopButton showScrollTop={showScrollTop} />
+            <ScrollToTopButton/>
         </div>
     );
 }

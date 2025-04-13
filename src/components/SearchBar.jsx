@@ -1,4 +1,4 @@
-export default function SearchBar({ query, setQuery, onSearch, filter, setFilter }) {
+export default function SearchBar({query, setQuery, onSearch, filter, setFilter}) {
     const handleSubmit = (e) => {
         e.preventDefault();
         onSearch();
@@ -24,6 +24,7 @@ export default function SearchBar({ query, setQuery, onSearch, filter, setFilter
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
             />
+
             <button
                 type="submit"
                 className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white px-4 py-2 rounded"
