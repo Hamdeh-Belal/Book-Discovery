@@ -7,7 +7,7 @@ export default function QuoteBanner() {
     const fetchQuote = async () => {
         try {
             const res = await axios.get("https://api.quotable.io/quotes/random");
-            setQuote(res.data);
+            setQuote(res.data[0]);
         } catch (error) {
             console.error("Failed to fetch quote:", error);
             setQuote({
