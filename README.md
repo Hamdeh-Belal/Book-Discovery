@@ -8,9 +8,9 @@ It demonstrates how to consume and interact with external **RESTful APIs** using
 
 ## 👥 Group Members
 
-- **Yazan Jamhour** — 1192533
-- **Amro Tariq** — 1201603
-- **Belal Hamdeh** — 1210148
+- [**Yazan Jamhour** ](https://github.com/jamhour1g)
+- [**Amro Tariq** ](https://github.com/Amro192)
+- [**Belal Hamdeh** ](https://github.com/Hamdeh-Belal)
 
 ---
 
